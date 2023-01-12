@@ -20,16 +20,17 @@
 * 多平台支持
 * 各种总线驱动，UART，I2C，SPI等等
 * 各种设备驱动，GPIO，PWM，IRQ，CLK，LED，BUZZER，VIBRATOR，WATCHDOG，RNG，FRAMEBUFFER，RTC等
-* 支持用lua编写应用软件，包含高等级API,可直接操作各种硬件抽象接口
+* ~~支持用lua编写应用软件，包含高等级API,可直接操作各种硬件抽象接口~~
 * 应用软件平台无关，一次编写，到处运行
 
 ![linux-sandbox-game-2048](docs/_images/linux-sandbox-game-2048.gif)
 
 # XBOOT LVGL 的修改
-主要用于 F1c100s 和 F1c200s
+用于 F1c100s 和 F1c200s
 
  * 移除了 Framework，XUI，Lua
  * 集成 LVGL `release/v8.3`
+ * 使用双缓冲 + DMA 刷新页面，LVGL Benchmark 36fps (800*480 / 32bit Depth)
 
 # 文档及开发工具
 * [Xboot文档](https://xboot.github.io/xboot)
