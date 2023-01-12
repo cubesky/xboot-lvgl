@@ -8,6 +8,6 @@
 
 int system(const char * cmd)
 {
-	return shell_system(cmd);
+	return 0;
 }
 EXPORT_SYMBOL(system);

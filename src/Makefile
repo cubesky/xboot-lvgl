@@ -5,14 +5,14 @@
 #
 # You can pass CROSS_COMPILE and PLATFORM variable.
 #
-CROSS_COMPILE	?=
-PLATFORM		?=
+CROSS_COMPILE	?= arm-none-eabi-
+PLATFORM		?= 
 
 #
 # Configurable advanced custom components
 #
-CFG_FRAMEWORK	?= y
-CFG_CAIRO		?= y
+CFG_FRAMEWORK	?= n
+CFG_CAIRO		?= n
 CFG_WBOXTEST 	?= n
 
 #
@@ -93,7 +93,6 @@ INCDIRS		+=	include \
 SRCDIRS		+=	arch/$(ARCH)/lib/cpu \
 				arch/$(ARCH)/lib \
 				arch/$(ARCH)/$(MACH) \
-				arch/$(ARCH)/$(MACH)/command \
 				arch/$(ARCH)/$(MACH)/driver \
 				lib/libc/charset \
 				lib/libc/crypto \
@@ -113,11 +112,8 @@ SRCDIRS		+=	arch/$(ARCH)/lib/cpu \
 				lib/libm \
 				lib/libx \
 				init \
-				kernel/command \
 				kernel/core \
 				kernel/graphic \
-				kernel/shell \
-				kernel/sound \
 				kernel/time \
 				kernel/vfs \
 				kernel/vfs/cpio \
@@ -128,7 +124,6 @@ SRCDIRS		+=	arch/$(ARCH)/lib/cpu \
 				kernel/vfs/tar \
 				kernel/vision \
 				kernel/xfs \
-				kernel/xui \
 				driver/adc \
 				driver/audio \
 				driver/battery \
@@ -192,11 +187,11 @@ SRCDIRS		+=	external/libpng-1.6.37
 INCDIRS		+= 	external/jpeg-9d
 SRCDIRS		+=	external/jpeg-9d
 
-INCDIRS		+=	external/stb_vorbis-1.21
-SRCDIRS		+=	external/stb_vorbis-1.21
+# INCDIRS		+=	external/stb_vorbis-1.21
+# SRCDIRS		+=	external/stb_vorbis-1.21
 
-INCDIRS		+=	external/quirc-1.1.0
-SRCDIRS		+=	external/quirc-1.1.0
+# INCDIRS		+=	external/quirc-1.1.0
+# SRCDIRS		+=	external/quirc-1.1.0
 
 INCDIRS		+=	external/libcg-1.0.4
 SRCDIRS		+=	external/libcg-1.0.4
@@ -239,6 +234,119 @@ SRCDIRS		+=	external/freetype-2.10.4/src/autofit \
 				external/freetype-2.10.4/src/type42 \
 				external/freetype-2.10.4/src/winfonts
 
+INCDIRS			+=  external/lvgl-8.3/lvgl \
+				external/lvgl-8.3/lvgl/src/core \
+				external/lvgl-8.3/lvgl/src/draw \
+				external/lvgl-8.3/lvgl/src/draw/arm2d \
+				external/lvgl-8.3/lvgl/src/draw/sdl \
+				external/lvgl-8.3/lvgl/src/draw/sw \
+				external/lvgl-8.3/lvgl/src/extra \
+				external/lvgl-8.3/lvgl/src/extra/layouts \
+				external/lvgl-8.3/lvgl/src/extra/layouts/flex \
+				external/lvgl-8.3/lvgl/src/extra/layouts/grid \
+				external/lvgl-8.3/lvgl/src/extra/libs \
+				external/lvgl-8.3/lvgl/src/extra/libs/bmp \
+				external/lvgl-8.3/lvgl/src/extra/libs/ffmpeg \
+				external/lvgl-8.3/lvgl/src/extra/libs/freetype \
+				external/lvgl-8.3/lvgl/src/extra/libs/fsdrv \
+				external/lvgl-8.3/lvgl/src/extra/libs/gif \
+				external/lvgl-8.3/lvgl/src/extra/libs/png \
+				external/lvgl-8.3/lvgl/src/extra/libs/rlottie \
+				external/lvgl-8.3/lvgl/src/extra/libs/sjpg \
+				external/lvgl-8.3/lvgl/src/extra/others \
+				external/lvgl-8.3/lvgl/src/extra/others/fragment \
+				external/lvgl-8.3/lvgl/src/extra/others/gridnav \
+				external/lvgl-8.3/lvgl/src/extra/others/ime \
+				external/lvgl-8.3/lvgl/src/extra/others/imgfont \
+				external/lvgl-8.3/lvgl/src/extra/others/monkey \
+				external/lvgl-8.3/lvgl/src/extra/others/msg \
+				external/lvgl-8.3/lvgl/src/extra/others/snapshot \
+				external/lvgl-8.3/lvgl/src/extra/themes \
+				external/lvgl-8.3/lvgl/src/extra/themes/basic \
+				external/lvgl-8.3/lvgl/src/extra/themes/default \
+				external/lvgl-8.3/lvgl/src/extra/themes/mono \
+				external/lvgl-8.3/lvgl/src/extra/widgets \
+				external/lvgl-8.3/lvgl/src/extra/widgets/animimg \
+				external/lvgl-8.3/lvgl/src/extra/widgets/calendar \
+				external/lvgl-8.3/lvgl/src/extra/widgets/chart \
+				external/lvgl-8.3/lvgl/src/extra/widgets/colorwheel \
+				external/lvgl-8.3/lvgl/src/extra/widgets/imgbtn \
+				external/lvgl-8.3/lvgl/src/extra/widgets/keyboard \
+				external/lvgl-8.3/lvgl/src/extra/widgets/led \
+				external/lvgl-8.3/lvgl/src/extra/widgets/list \
+				external/lvgl-8.3/lvgl/src/extra/widgets/menu \
+				external/lvgl-8.3/lvgl/src/extra/widgets/meter \
+				external/lvgl-8.3/lvgl/src/extra/widgets/msgbox \
+				external/lvgl-8.3/lvgl/src/extra/widgets/span \
+				external/lvgl-8.3/lvgl/src/extra/widgets/spinbox \
+				external/lvgl-8.3/lvgl/src/extra/widgets/spinner \
+				external/lvgl-8.3/lvgl/src/extra/widgets/tabview \
+				external/lvgl-8.3/lvgl/src/extra/widgets/tileview \
+				external/lvgl-8.3/lvgl/src/extra/widgets/win \
+				external/lvgl-8.3/lvgl/src/font \
+				external/lvgl-8.3/lvgl/src/hal \
+				external/lvgl-8.3/lvgl/src/misc \
+				external/lvgl-8.3/lvgl/src/widgets \
+				external/lvgl-8.3/lvgl/demos \
+				external/lvgl-8.3/lvgl/demos/benchmark \
+				external/lvgl-8.3/lvgl/demos/benchmark/assets
+
+SRCDIRS			+= external/lvgl-8.3/lvgl/ \
+				external/lvgl-8.3/lvgl/src/core \
+				external/lvgl-8.3/lvgl/src/draw \
+				external/lvgl-8.3/lvgl/src/draw/arm2d \
+				external/lvgl-8.3/lvgl/src/draw/sdl \
+				external/lvgl-8.3/lvgl/src/draw/sw \
+				external/lvgl-8.3/lvgl/src/extra \
+				external/lvgl-8.3/lvgl/src/extra/layouts \
+				external/lvgl-8.3/lvgl/src/extra/layouts/flex \
+				external/lvgl-8.3/lvgl/src/extra/layouts/grid \
+				external/lvgl-8.3/lvgl/src/extra/libs \
+				external/lvgl-8.3/lvgl/src/extra/libs/bmp \
+				external/lvgl-8.3/lvgl/src/extra/libs/ffmpeg \
+				external/lvgl-8.3/lvgl/src/extra/libs/freetype \
+				external/lvgl-8.3/lvgl/src/extra/libs/fsdrv \
+				external/lvgl-8.3/lvgl/src/extra/libs/gif \
+				external/lvgl-8.3/lvgl/src/extra/libs/png \
+				external/lvgl-8.3/lvgl/src/extra/libs/rlottie \
+				external/lvgl-8.3/lvgl/src/extra/libs/sjpg \
+				external/lvgl-8.3/lvgl/src/extra/others \
+				external/lvgl-8.3/lvgl/src/extra/others/fragment \
+				external/lvgl-8.3/lvgl/src/extra/others/gridnav \
+				external/lvgl-8.3/lvgl/src/extra/others/ime \
+				external/lvgl-8.3/lvgl/src/extra/others/imgfont \
+				external/lvgl-8.3/lvgl/src/extra/others/monkey \
+				external/lvgl-8.3/lvgl/src/extra/others/msg \
+				external/lvgl-8.3/lvgl/src/extra/others/snapshot \
+				external/lvgl-8.3/lvgl/src/extra/themes \
+				external/lvgl-8.3/lvgl/src/extra/themes/basic \
+				external/lvgl-8.3/lvgl/src/extra/themes/default \
+				external/lvgl-8.3/lvgl/src/extra/themes/mono \
+				external/lvgl-8.3/lvgl/src/extra/widgets \
+				external/lvgl-8.3/lvgl/src/extra/widgets/animimg \
+				external/lvgl-8.3/lvgl/src/extra/widgets/calendar \
+				external/lvgl-8.3/lvgl/src/extra/widgets/chart \
+				external/lvgl-8.3/lvgl/src/extra/widgets/colorwheel \
+				external/lvgl-8.3/lvgl/src/extra/widgets/imgbtn \
+				external/lvgl-8.3/lvgl/src/extra/widgets/keyboard \
+				external/lvgl-8.3/lvgl/src/extra/widgets/led \
+				external/lvgl-8.3/lvgl/src/extra/widgets/list \
+				external/lvgl-8.3/lvgl/src/extra/widgets/menu \
+				external/lvgl-8.3/lvgl/src/extra/widgets/meter \
+				external/lvgl-8.3/lvgl/src/extra/widgets/msgbox \
+				external/lvgl-8.3/lvgl/src/extra/widgets/span \
+				external/lvgl-8.3/lvgl/src/extra/widgets/spinbox \
+				external/lvgl-8.3/lvgl/src/extra/widgets/spinner \
+				external/lvgl-8.3/lvgl/src/extra/widgets/tabview \
+				external/lvgl-8.3/lvgl/src/extra/widgets/tileview \
+				external/lvgl-8.3/lvgl/src/extra/widgets/win \
+				external/lvgl-8.3/lvgl/src/font \
+				external/lvgl-8.3/lvgl/src/hal \
+				external/lvgl-8.3/lvgl/src/misc \
+				external/lvgl-8.3/lvgl/src/widgets \
+				external/lvgl-8.3/lvgl/demos \
+				external/lvgl-8.3/lvgl/demos/benchmark \
+				external/lvgl-8.3/lvgl/demos/benchmark/assets
 #
 # Advanced custom components
 #
@@ -354,8 +462,8 @@ romdisk :
 	@$(RM) .obj/driver/block/romdisk.o
 	@$(RM) .obj/romdisk
 	@$(RM) .obj/romdisk.cpio
-	@$(CP) romdisk .obj
 ifeq ($(strip $(CFG_FRAMEWORK)), y)
+	@$(CP) romdisk .obj
 	@$(CP) framework/romdisk .obj
 endif
 	@$(CP) arch/$(ARCH)/$(MACH)/romdisk .obj

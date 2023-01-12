@@ -28,6 +28,9 @@
 
 #include <xboot.h>
 #include <init.h>
+#include "drv.h"
+#include "lvgl.h"
+#include "lv_demo_benchmark.h"
 
 static void init_task(struct task_t * task, void * data)
 {
@@ -36,27 +39,13 @@ static void init_task(struct task_t * task, void * data)
 
 	/* Do initial calls */
 	do_initcalls();
-
-	/* Do initial setting */
-	do_init_setting();
-
-	/* Do show logo */
-	do_show_logo();
-
-	/* Do play audio */
-	do_play_audio();
-
-	/* Do auto mount */
-	do_auto_mount();
-
-	/* Do idle task */
-	do_idle_task();
-
-	/* Do shell task */
-	do_shell_task();
-
-	/* Do auto boot */
-	do_auto_boot();
+	
+	hal_init();
+	lv_demo_benchmark();
+	while (1)
+    {
+        lv_task_handler();
+    }
 }
 
 void xboot_main(void)
